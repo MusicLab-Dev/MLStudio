@@ -41,21 +41,21 @@ public:
      *
      * @return NodeModel*
      */
-    NodeModel *master(void);
+    inline NodeModel *master(void) noexcept { return _master; }
 
     /**
      * @brief READ the master node in const
      *
      * @return NodeModel*
      */
-    NodeModel *master(void) const;
+    inline NodeModel *master(void) const noexcept { return _master; }
 
     /**
      * @brief READ the playback Mode in const
      *
      * @return Project::PlaybackMode
      */
-    Project::PlaybackMode playbackMode(void) const;
+    inline Project::PlaybackMode playbackMode(void) const noexcept { return _playbackMode};
 
     /**
      * @brief Set the Playback Mode
@@ -64,14 +64,20 @@ public:
      * @return true
      * @return false
      */
-    bool setPlaybackMode(const Project::playbackMode mode);
+    bool setPlaybackMode(const Project::playbackMode mode) noexcept
+    {
+        if (_playbackMode == mode)
+            return false;
+        _playbackMode = mode;
+        return true;
+    }
 
     /**
      * @brief READ the name
      *
      * @return const QString&
      */
-    const QString &name(void);
+    inline const QString &name(void) noexcept { return _name; }
 
     /**
      * @brief Set the Name
@@ -80,7 +86,13 @@ public:
      * @return true
      * @return false
      */
-    bool setName(const QString &name);
+    bool setName(const QString &name) noexcept
+    {
+        if (_name == name)
+            return false;
+        _name = name;
+        return true;
+    }
 
 signals:
 
@@ -91,6 +103,7 @@ signals:
 private:
 
     Audio::Project *_data;
+    Audio::Project::PlaybackMode _playbackMode;
     UniqueAlloc<NodeModel> _master;
 
 };
