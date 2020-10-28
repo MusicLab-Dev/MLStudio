@@ -5,8 +5,6 @@
 
 #include "Studio.hpp"
 
-using namespace ML;
-
 void Studio::run(void)
 {
 

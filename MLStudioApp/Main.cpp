@@ -10,7 +10,7 @@
 int main(void)
 {
     try {
-        ML::Studio studio;
+        Studio studio;
 
         studio.run();
         return 0;
