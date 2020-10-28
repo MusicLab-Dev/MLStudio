@@ -9,10 +9,7 @@
 
 #include <MLAudio/Project.hpp>
 
-/**
- * @brief The project own the main node and all the project data
- */
-
+/** @brief The project own the main node and all the project data */
 class Project : public QObject
 {
     Q_OBJECT
@@ -32,8 +29,10 @@ public:
     };
     Q_ENUM(PlaybackMode)
 
+
     /** @brief Construct a new project instance */
     explicit Project(QObject *parent = nullptr);
+
 
     /** @brief Get the master node */
     [[nodiscard]] NodeModel *master(void) noexcept { return _master; }
@@ -55,7 +54,7 @@ public:
 
 
     /** @brief Get the project path */
-    const QString &name(void) const noexcept { return _name; }
+    const QString &path(void) const noexcept { return _path; }
 
 
     /** @brief Load a project file */
