@@ -8,47 +8,49 @@
 #include <QObject>
 #include <QAbstractListModel>
 
-namespace ML
-{
-    class InstancesModel;
-}
+#include <MLCore/Utils.hpp>
+#include <MLAudio/Base.hpp>
 
-/**
- * @brief The studio is the instance running the application process
- */
-class ML::InstancesModel : public QAbstractListModel
+/** @brief The studio is the instance running the application process */
+class InstancesModel : public QAbstractListModel
 {
     Q_OBJECT
-public:
 
-    enum InstancesModelRoles {
-        rangeRole = Qt::UserRole + 1
+public:
+    /** @brief Roles of each instance */
+    enum class Roles {
+        Range = Qt::UserRole + 1
     };
 
-    InstancesModel(QObject *parent = nullptr);
-    ~InstancesModel() = default;
+    /** @brief Default constructor */
+    explicit InstancesModel(QObject *parent = nullptr) noexcept;
 
-    int rowCount(const QModelIndex &p) const;
+    /** @brief Destruct the instance */
+    ~InstancesModel(void) noexcept = default;
 
-    QVariant data(const QModelIndex &index, int role) const;
+    /** @brief Get the list of all roles */
+    [[nodiscard]] QHash<int, QByteArray> roleNames(void) const noexcept override;
 
-    QHash<int, QByteArray> roleNames() const;
+    /** @brief Return the count of element in the model */
+    [[nodiscard]] int count(void) const noexcept { return  _data->size(); }
+    [[nodiscard]] int rowCount(const QModelIndex &) const noexcept override { return count(); }
 
-    void add(const Audio::BeatRange &range);
-
-    void remove(const int index);
-    
-    const Audio::BeatRange& get(const int index) const;
-    
-    int count(void) const;
-    
-    void move(const int index, const Audio::BeatRange &range);
+    /** @brief Query a role from children */
+    [[nodiscard]] QVariant data(const QModelIndex &index, int role) const noexcept override;
+ 
+    /** @brief Get a beat range from internal list */
+    [[nodiscard]] const Audio::BeatRange &get(const int index) const;
 
 public slots:
+    /** @brief Add a children to the list */
+    void add(const Audio::BeatRange &range) noexcept_ndebug;
 
-    void range();
+    /** @brief Remove a children from the list */
+    void remove(const int index);
 
+    /** @brief Move beatrange at index */
+    void move(const int index, const Audio::BeatRange &range);
 
 private:
-    Audio::BeatRange *_data
+    Audio::BeatRanges *_data;
 };

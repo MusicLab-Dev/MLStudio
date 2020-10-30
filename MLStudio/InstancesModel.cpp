@@ -3,27 +3,46 @@
  * @ Description: InsatancesModel class
  */
 
+#include <stdexcept>
+
 #include "InstancesModel.hpp"
 
-QHash<int, QByteArray> ML::InstancesModel::roleNames() const
+QHash<int, QByteArray> InstancesModel::roleNames(void) const noexcept
 {
-    QHash<int, QByteArray> names;
-    names[rangeRole] = "range";
-    return names;
+    return QHash<int, QByteArray> {
+        { Roles::Range, "range "}
+    };
 }
  
-QVariant ML::InstancesModel::data(const QModelIndex & index, int role) const{
-    if(index.row() < 0 || index.row() >= count())
-        return  QVariant();
-
-    const Audio::BeatRange &beat = _data[index.row()];
-    if (role == rangeRole)
-        return range();
-    return QVariant();
+QVariant InstancesModel::data(const QModelIndex &index, int role) const noexcept_ndebug
+{
+    coreAssert(index.row() < 0 || index.row() >= count(),
+        throw std::range_error("InstancesModel::data: Given index is not in range"));
+    const auto &child = (*_data)[index.row()];
+    switch (role) {
+    case Roles::Range:
+        return child;
+    default:
+        return QVariant();
+    }
 }
 
+const Audio::BeatRange &InstancesModel::get(const int index) const
+{
 
-int ML::InstancesModel::rowCount(const QModelIndex & parent) const { 
-    Q_UNUSED(parent); 
-    return count(); 
-} 
+}
+
+void InstancesModel::add(const Audio::BeatRange &range) noexcept_ndebug
+{
+
+}
+
+void InstancesModel::remove(const int index)
+{
+
+}
+
+void InstancesModel::move(const int index, const Audio::BeatRange &range) noexcept_ndebug
+{
+
+}
