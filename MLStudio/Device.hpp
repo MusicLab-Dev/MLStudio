@@ -14,10 +14,54 @@ class Device : public QObject
     Q_PROPERTY(bool record READ record WRITE setRecord NOTIFY recordChanged)
     Q_PROPERTY(int sampleRate READ sampleRate WRITE setSampleRate NOTIFY recordChanged)
     Q_PROPERTY(Audio::Device::Format format READ format WRITE setFormat NOTIFY formatChanged)
-    Q_PROPERTY(uint8 channel READ channel WRITE setChannel NOTIFY channelChanged)
+    Q_PROPERTY(uint8 channels READ channels WRITE setChannels NOTIFY channelsChanged)
     Q_PROPERTY(uint16 sample READ sample WRITE setSample NOTIFY sampleChanged)
 
 public:
+
+        /** @brief Default constructor */
+    explicit Device(QObject *parent = nullptr) noexcept;
+
+    /** @brief Destruct the instance */
+    ~Device(void) noexcept = default;
+
+    /** @brief GET the record */
+    [[nodiscard]] bool record(void) const noexcept { /* TODO*/ }
+
+    /** @brief SET the record */
+    void setRecord(bool record) noexcept;
+
+    /** @brief GET the sample rate */
+    [[nodiscard]] int sampleRate(void) const noexcept { return _data->sampleRate(); }
+
+    /** @brief SET the sample rate */
+    void setSampleRate(int sampleRate) noexcept;
+
+    /** @brief GET the format */
+    [[nodiscard]] const Audio::Device::Format &format(void) const noexcept { return _data->format(); }
+
+    /** @brief SET the format */
+    void setFormat(const Audio::Device::Format &format) noexcept;
+
+    /** @brief GET the channels */
+    [[nodiscard]] uint8 channels(void) const noexcept { return _data->channels(); }
+
+    /** @brief SET the channels */
+    void setChannels(uint8 channels) noexcept;
+
+    /** @brief GET the record */
+    [[nodiscard]] uin16 sample(void) const noexcept { return _data->sample(); }
+
+    /** @brief SET the record */
+    void setSample(uint16 sample) noexcept;
+
+signals:
+
+    void recordChanged(void);
+    void sampleRateChanged(void);
+    void formatChanged(void);
+    void channelsChanged(void);
+    void sampleChanged(void);
 
 private:
     Audio::DevicePtr _data;
