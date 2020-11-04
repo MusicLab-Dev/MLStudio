@@ -12,7 +12,7 @@
 
 #include "Device.hpp"
 
-
+/** @brief Device Model class */
 class DeviceModel : public QAbstractListModel
 {
     Q_OBJECT

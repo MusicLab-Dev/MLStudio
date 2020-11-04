@@ -9,6 +9,7 @@
 
 #include <MLAudio/Device.hpp>
 
+/** @brief Device class */
 class Device : public QObject
 {
     Q_OBJECT
