@@ -10,7 +10,7 @@
 QHash<int, QByteArray> InstancesModel::roleNames(void) const noexcept
 {
     return QHash<int, QByteArray> {
-        { Roles::Range, "range "}
+        { Roles::Range, "range"}
     };
 }
  
