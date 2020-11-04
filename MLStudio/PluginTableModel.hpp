@@ -8,6 +8,8 @@
 #include <QObject>
 #include <QAbstractListModel>
 
+
+/** @brief Plugin Table Model class */
 class PluginTableModel : public QAbstractListModel
 {
     Q_OBJECT
