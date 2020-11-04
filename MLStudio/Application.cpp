@@ -5,6 +5,11 @@
 
 #include "Application.hpp"
 
+Application::Application(QObject *parent) noexcept
+{
+    QQmlEngine::setObjectOwnership(this, QQmlEngine::ObjectOwnership::CppOwnership);
+}
+
 bool Application::setProject(ProjectModel *project) noexcept
 {
     if (_project == project)

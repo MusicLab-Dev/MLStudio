@@ -9,7 +9,7 @@
 
 #include <QObject>
 
-/** @brief */
+/** @brief Application class */
 class Application : public QObject
 {
     Q_OBJECT
@@ -61,9 +61,9 @@ private:
     void setupScheduler(void);
 
 private:
-    std::unique_ptr<ProjectModel> _project;
-    std::unique_ptr<DeviceModel> _device;
-    std::unique_ptr<PluginTableModel> _plugins;
-    std::unique_ptr<Scheduler> _scheduler;
-    std::unique_ptr<Device> _outputDevice;
+    std::unique_ptr<ProjectModel> _project { nullptr };
+    std::unique_ptr<DeviceModel> _device { nullptr };
+    std::unique_ptr<PluginTableModel> _plugins { nullptr };
+    std::unique_ptr<Scheduler> _scheduler { nullptr };
+    std::unique_ptr<Device> _outputDevice { nullptr };
 };
