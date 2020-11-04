@@ -7,6 +7,8 @@
 
 #include <QObject>
 
+#include <MLAudio/Device.hpp>
+
 class Device : public QObject
 {
     Q_OBJECT
@@ -18,35 +20,34 @@ class Device : public QObject
     Q_PROPERTY(uint16 sample READ sample WRITE setSample NOTIFY sampleChanged)
 
 public:
-
-        /** @brief Default constructor */
+    /** @brief Default constructor */
     explicit Device(QObject *parent = nullptr) noexcept;
 
     /** @brief Destruct the instance */
     ~Device(void) noexcept = default;
 
-    /** @brief GET the record */
+    /** @brief Get the record */
     [[nodiscard]] bool record(void) const noexcept { /* TODO*/ }
 
-    /** @brief SET the record */
+    /** @brief Set the record */
     bool setRecord(bool record) noexcept;
 
-    /** @brief GET the sample rate */
+    /** @brief Get the sample rate */
     [[nodiscard]] int sampleRate(void) const noexcept { return _data->sampleRate(); }
 
     /** @brief SET the sample rate */
     bool setSampleRate(int sampleRate) noexcept;
 
-    /** @brief GET the format */
+    /** @brief Get the format */
     [[nodiscard]] const Audio::Device::Format &format(void) const noexcept { return _data->format(); }
 
-    /** @brief SET the format */
+    /** @brief Set the format */
     bool setFormat(const Audio::Device::Format &format) noexcept;
 
-    /** @brief GET the channels */
+    /** @brief Get the channels */
     [[nodiscard]] uint8 channels(void) const noexcept { return _data->channels(); }
 
-    /** @brief SET the channels */
+    /** @brief Set the channels */
     bool setChannels(uint8 channels) noexcept;
 
     /** @brief GET the record */
@@ -57,12 +58,21 @@ public:
 
 signals:
 
+    /** @brief Notify that record property has changed */
     void recordChanged(void);
+
+    /** @brief Notify that sample rate property has changed */
     void sampleRateChanged(void);
+
+    /** @brief Notify that format property has changed */
     void formatChanged(void);
+
+    /** @brief Notify that channels property has changed */
     void channelsChanged(void);
+
+    /** @brief Notify that sample property has changed */
     void sampleChanged(void);
 
 private:
-    Audio::DevicePtr _data;
+    Audio::DevicePtr _data {};
 }
