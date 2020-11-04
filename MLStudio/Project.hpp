@@ -28,8 +28,10 @@ public:
     };
     Q_ENUM(PlaybackMode)
 
+
     /** @brief Construct a new project instance */
     explicit Project(QObject *parent = nullptr);
+
 
     /** @brief Get the master node */
     [[nodiscard]] NodeModel *master(void) noexcept { return _master; }
@@ -51,7 +53,7 @@ public:
 
 
     /** @brief Get the project path */
-    const QString &name(void) const noexcept { return _name; }
+    const QString &path(void) const noexcept { return _path; }
 
 
     /** @brief Load a project file */
