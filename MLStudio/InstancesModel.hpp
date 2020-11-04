@@ -37,7 +37,7 @@ public:
 
     /** @brief Query a role from children */
     [[nodiscard]] QVariant data(const QModelIndex &index, int role) const noexcept override;
- 
+
     /** @brief Get a beat range from internal list */
     [[nodiscard]] const Audio::BeatRange &get(const int index) const;
 
@@ -52,5 +52,5 @@ public slots:
     void move(const int index, const Audio::BeatRange &range);
 
 private:
-    Audio::BeatRanges *_data;
+    Audio::BeatRanges *_data { nullptr };
 };

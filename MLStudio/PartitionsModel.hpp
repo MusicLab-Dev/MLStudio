@@ -19,7 +19,6 @@ class PartitionsModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-
     /** @brief Roles of each instance */
     enum class Roles {
         Partition = Qt::UserRole + 1
@@ -40,7 +39,7 @@ public:
 
     /** @brief Query a role from children */
     [[nodiscard]] QVariant data(const QModelIndex &index, int role) const noexcept override;
- 
+
     /** @brief Get a beat range from internal list */
     [[nodiscard]] const PartitionModel &get(const int index) const;
 
@@ -55,6 +54,6 @@ public slots:
     void move(const int from, const int to);
 
 private:
-    Audio::Partitions *_data;
-    std::vector<UniqueAlloc<PartitionModel>> _models;
+    Audio::Partitions *_data { nullptr };
+    std::vector<UniqueAlloc<PartitionModel>> _models {};
 }

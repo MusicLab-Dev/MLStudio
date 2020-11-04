@@ -7,13 +7,18 @@
 
 #include "InstancesModel.hpp"
 
+InstancesModel::InstancesModel(QObject *parent) noexcept
+{
+    QQmlEngine::setObjectOwnership(this, QQmlEngine::ObjectOwnership::CppOwnership);
+}
+
 QHash<int, QByteArray> InstancesModel::roleNames(void) const noexcept
 {
     return QHash<int, QByteArray> {
         { Roles::Range, "range"}
     };
 }
- 
+
 QVariant InstancesModel::data(const QModelIndex &index, int role) const noexcept_ndebug
 {
     coreAssert(index.row() < 0 || index.row() >= count(),

@@ -13,11 +13,11 @@
 class PartitionModel : public QAbstractListModel
 {
     Q_OBJECT
+
     Q_PROPERTY(bool muted READ muted WRITE setMuted NOTIFY mutedChanged)
     Q_PROPERTY(Channel channel READ channel WRITE setChannel NOTIFY channelChanged)
 
 public:
-
     /** @brief Roles of each partition */
     enum class Roles {
         Range = Qt::UserRole + 1,
@@ -62,13 +62,13 @@ signals:
 
     /** @brief Notify that the channel has changed */
     void channelChanged(void);
- 
+
 private:
-    Audio::Partition *_data;
-    UniqueAlloc<InstancesModel > _instancesModel;
+    Audio::Partition *_data { nullptr };
+    UniqueAlloc<InstancesModel> _instancesModel {};
 
     //Properties
-    bool _muted;
-    Channel _channel;
-    InstancesModel *_instances;
+    bool _muted { false };
+    Channel _channel {} ;
+    InstancesModel *_instances { nullptr };
 }

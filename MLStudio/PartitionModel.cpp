@@ -7,6 +7,11 @@
 
 #include "PartitionModel.hpp"
 
+PartitionModel::PartitionModel(QObject *parent) noexcept
+{
+    QQmlEngine::setObjectOwnership(this, QQmlEngine::ObjectOwnership::CppOwnership);
+}
+
 QHash<int, QByteArray> PartitionModel::roleNames(void) const noexcept
 {
     return QHash<int, QByteArray> {
@@ -15,7 +20,7 @@ QHash<int, QByteArray> PartitionModel::roleNames(void) const noexcept
         { Roles::Tuning, "tuning"},
         { Roles::NoteIndex, "noteIndex"},
         { Roles::EventType, "eventType"},
-        { Roles::Key, "key"}        
+        { Roles::Key, "key"}
     };
 }
 
