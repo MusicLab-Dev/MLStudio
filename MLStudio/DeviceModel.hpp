@@ -18,7 +18,7 @@ class DeviceModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-
+    /** @brief Pointer to a Device */
     using DevicePtr = std::unique_ptr<Device>;
 
     /** @brief Roles of each instance */
@@ -44,14 +44,11 @@ public:
     /** @brief Query a role from children */
     [[nodiscard]] QVariant data(const QModelIndex &index, int role) const noexcept override;
 
-
 public slots:
-
+    /** @brief Create a new DevicePtr instance */
     DevicePtr instantiate(const QString &name);
 
-
 private:
-
-    Audio::DeviceCapabilities _devices;
+    Audio::DeviceCapabilities _devices {};
 
 }

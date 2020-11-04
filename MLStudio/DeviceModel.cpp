@@ -5,7 +5,14 @@
 
 #include <stdexcept>
 
+#include <QQmlEngine>
+
 #include "DeviceModel.hpp"
+
+DeviceModel::DeviceModel(QObject *parent) noexcept
+{
+    QQmlEngine::setObjectOwnership(this, QQmlEngine::ObjectOwnership::CppOwnership);
+}
 
 QHash<int, QByteArray> DeviceModel::roleNames(void) const noexcept
 {
