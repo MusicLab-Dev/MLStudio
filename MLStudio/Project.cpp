@@ -5,7 +5,10 @@
 
 #include "Project.hpp"
 
-//test
+Project::Project(QObject *parent) noexcept
+{
+    QQmlEngine::setObjectOwnership(this, QQmlEngine::ObjectOwnership::CppOwnership);
+}
 
 bool Project::setPlaybackMode(const PlaybackMode mode) noexcept
 {
@@ -21,5 +24,6 @@ bool Project::setName(const QString &name) noexcept
     if (_name == name)
         return false;
     _name = name;
+    emit nameChanged();
     return true;
 }

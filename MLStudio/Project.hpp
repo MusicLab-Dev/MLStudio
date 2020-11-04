@@ -9,10 +9,7 @@
 
 #include <MLAudio/Project.hpp>
 
-/**
- * @brief The project own the main node and all the project data
- */
-
+/** @brief The project own the main node and all the project data */
 class Project : public QObject
 {
     Q_OBJECT
@@ -23,7 +20,6 @@ class Project : public QObject
     Q_PROPERTY(QString path READ path NOTIFY pathChanged)
 
 public:
-
     /** @brief The different types of playback mode */
     enum class PlaybackMode
     {
@@ -82,7 +78,7 @@ signals:
     void pathChanged(void);
 
 private:
-    Audio::Project _data;
-    QString _path;
-    UniqueAlloc<NodeModel> _master;
+    Audio::Project _data {};
+    QString _path {};
+    UniqueAlloc<NodeModel> _master { nullptr };
 };
