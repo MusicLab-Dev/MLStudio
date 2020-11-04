@@ -7,13 +7,12 @@
 
 #include <MLStudio/Studio.hpp>
 
-int main(void)
+int main(int argc, char *argv[])
 {
     try {
-        ML::Studio studio;
+        Studio studio(argc, argv);
 
-        studio.run();
-        return 0;
+        return studio.run();
     } catch (const std::exception &e) {
         std::cerr << "\nAn error occured:\n\t" << e.what() << std::endl;
     }

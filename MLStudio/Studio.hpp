@@ -5,18 +5,22 @@
 
 #pragma once
 
-namespace ML
-{
-    class Studio;
-}
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+
+class Studio;
 
 /**
  * @brief The studio is the instance running the application process
  */
-class ML::Studio
+class Studio : protected QGuiApplication
 {
+    Q_OBJECT
 public:
-    void run(void);
+    Studio(int argc, char *argv[]);
+
+    [[nodiscard]] int run(void);
 
 private:
+    QQmlApplicationEngine _engine;
 };

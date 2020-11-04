@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>DefaultCheckBox.qml</file>
+        <file>DefaultComboBox.qml</file>
+    </qresource>
+</RCC>

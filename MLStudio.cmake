@@ -2,6 +2,8 @@ project(MLStudio)
 
 get_filename_component(MLStudioDir ${CMAKE_CURRENT_LIST_FILE} PATH)
 
+set(MLStudioAppDesignDir ${MLStudioDir}/Design)
+
 include(${MLStudioDir}/MLStudio/MLStudioLib.cmake)
 include(${MLStudioDir}/MLStudioApp/MLStudioApp.cmake)
 

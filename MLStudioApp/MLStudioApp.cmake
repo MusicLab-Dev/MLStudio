@@ -6,7 +6,12 @@ set(MLStudioAppSources
     ${MLStudioAppDir}/Main.cpp
 )
 
-add_executable(${CMAKE_PROJECT_NAME} ${MLStudioAppSources})
+set(MLStudioAppResources
+    ${MLStudioAppDesignDir}/Design.qrc
+    ${MLStudioAppDesignDir}/Default/Default.qrc
+)
+
+add_executable(${PROJECT_NAME} ${MLStudioAppSources} ${MLStudioAppResources})
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${MLStudioDir})
 
