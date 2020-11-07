@@ -7,7 +7,7 @@
 
 #include <QQmlEngine>
 
-#include "NodeModel.hpp"
+#include "PluginTableModel.hpp"
 
 PluginTableModel::PluginTableModel(QObject *parent) noexcept
 {
@@ -20,43 +20,35 @@ QHash<int, QByteArray> PluginTableModel::roleNames(void) const noexcept
         { Roles::Name, "name" },
         { Roles::Path, "path" },
         { Roles::SDK, "sdk" },
-        { Roles::Tags, "tags" },
-        { Roles::Flags, "flags" },
+        { Roles::Tags, "tags" }
     };
 }
 
-QVariant NodeModel::data(const QModelIndex &index, int role) const noexcept_ndebug
+QVariant PluginTableModel::data(const QModelIndex &index, int role) const noexcept_ndebug
 {
-    coreAssert(index.row() < 0 || index.row() >= count(),
-        throw std::range_error("InstancesModel::data: Given index is not in range"));
-    const auto &child = (*_data)[index.row()];
+    const auto *factory = get();
     switch (role) {
     case Roles::Name:
-        return child.name();
+        return factory->name();
     case Roles::Path:
-        return child.path();
+        return factory->path();
     case Roles::SDK:
-        return child.sdk();
+        return factory->sdk();
     case Roles::Tags:
-        return child.tags();
-    case Roles::Flags:
-        return child.flags();
+        return factory->tags();
     default:
         return QVariant();
     }
 }
 
-IFactory *PluginTableModel::get(const int index)
+Audio::IPluginFactory *PluginTableModel::get(const int index) noexcept_ndebug
 {
-    /** TODO */
+    coreAssert(index >= 0 && index < count(),
+        throw std::out_of_range("PluginTableModel::get: Invalid index " + std::to_string(index)));
+    return _data.factories()[index].get();
 }
 
-int PluginTableModel::count(void) const noexcept
-{
-    /** TODO */
-}
-
-void PluginTableModel::add(const QString &path)
+int PluginTableModel::add(const QString &path)
 {
     /** TODO */
 }

@@ -8,6 +8,9 @@
 #include <QObject>
 #include <QAbstractListModel>
 
+#include <MLCore/Assert.hpp>
+#include <MLAudio/PluginTable.hpp>
+
 
 /** @brief Plugin Table Model class */
 class PluginTableModel : public QAbstractListModel
@@ -20,8 +23,7 @@ public:
         Name = Qt::UserRole + 1,
         Path,
         SDK,
-        Tags,
-        Flags
+        Tags
     };
 
     /** @brief Default constructor */
@@ -35,7 +37,7 @@ public:
     [[nodiscard]] QHash<int, QByteArray> roleNames(void) const noexcept override;
 
     /** @brief Return the count of element in the model */
-    [[nodiscard]] int count(void) const noexcept { return  _data->size(); }
+    [[nodiscard]] int count(void) const noexcept { return _data.factories().size(); }
     [[nodiscard]] int rowCount(const QModelIndex &) const noexcept override { return count(); }
 
     /** @brief Query a role from children */
@@ -43,19 +45,15 @@ public:
 
 
     /** @brief Get an factory instance */
-    IFactory *get(const int index);
-
-    /** @brief Get the count of instances */
-    int count(void) const noexcept;
+    [[nodiscard]] Audio::IPluginFactory *get(const int index) noexcept_ndebug;
 
 public slots:
     /** @brief Add an new instance */
-    void add(const QString &path);
+    int add(const QString &path);
 
     /** @brief Remove an current instance */
     void remove(const int index);
 
 private:
-    Audio::PluginTable::Instance _pluginTable {};
-
-}
+    Audio::PluginTable &_data { Audio::PluginTable::Get() };
+};
