@@ -10,6 +10,7 @@
 #include "DeviceModel.hpp"
 
 DeviceModel::DeviceModel(QObject *parent) noexcept
+    : QAbstractListModel(parent)
 {
     QQmlEngine::setObjectOwnership(this, QQmlEngine::ObjectOwnership::CppOwnership);
 }

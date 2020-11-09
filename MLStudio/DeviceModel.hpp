@@ -18,9 +18,6 @@ class DeviceModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    /** @brief Pointer to a Device */
-    using DevicePtr = std::unique_ptr<Device>;
-
     /** @brief Roles of each instance */
     enum class Roles {
         Name = Qt::UserRole + 1,
@@ -50,5 +47,4 @@ public slots:
 
 private:
     Audio::DeviceCapabilities _devices {};
-
-}
+};

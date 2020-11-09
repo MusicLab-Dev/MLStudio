@@ -3,57 +3,45 @@
  * @ Description: Device implementation
  */
 
-#include "Device.hpp"
-
 #include <QQmlEngine>
 
-Device::Device(QObject *parent) noexcept
+#include "Device.hpp"
+
+Device::Device(QObject *parent, const Audio::Descriptor &descriptor)
+    : QObject(parent) //, _data(...)
 {
     QQmlEngine::setObjectOwnership(this, QQmlEngine::ObjectOwnership::CppOwnership);
 }
 
-bool Device::setRecord(bool record) noexcept
+bool Device::setSampleRate(const int sampleRate) noexcept
 {
-    if (record() == record)
+    if (!_data->setSampleRate(sampleRate))
         return false;
-    _data->setRecord(record);
-    emit recordChanged();
-    return true;
-}
-
-bool setSampleRate(int sampleRate) noexcept
-{
-    if (sampleRate() == sampleRate)
-        return false;
-    _data->setSampleRate(sampleRate);
     emit sampleRateChanged();
     return true;
 }
 
-bool setFormat(const Audio::Device::Format &format) noexcept
+bool Device::setFormat(const Audio::Device::Format &format) noexcept
 {
-    if (format() == format)
+    if (!_data->setFormat(format))
         return false;
-    _data->setFormat(format);
     emit formatChanged();
     return true;
 }
 
-bool setChannels(uint8 channels) noexcept
+bool Device::setChannels(const uint8 channels) noexcept
 {
-    if (channels() == channels)
+    if (!_data->setChannels(channels))
         return false;
-    _data->setChannels(channels);
     emit channelsChanged();
     return true;
 }
 
-bool setSample(uint16 sample) noexcept
+bool Device::setSample(const uint16 sample) noexcept
 {
-    if (sample() == sample)
+    if (!_data->setSample(sample))
         return false;
     emit sampleChanged();
-    _data->setSample(sample);
     return true;
 }
 
