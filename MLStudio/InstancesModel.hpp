@@ -37,19 +37,19 @@ public:
 
     /** @brief Query a role from children */
     [[nodiscard]] QVariant data(const QModelIndex &index, int role) const noexcept override;
- 
+
     /** @brief Get a beat range from internal list */
-    [[nodiscard]] const Audio::BeatRange &get(const int index) const;
+    [[nodiscard]] const Audio::BeatRange &get(const int index) const noexcept_ndebug;
 
 public slots:
     /** @brief Add a children to the list */
-    void add(const Audio::BeatRange &range) noexcept_ndebug;
+    void add(const Audio::BeatRange &range) noexcept;
 
     /** @brief Remove a children from the list */
-    void remove(const int index);
+    void remove(const int index) noexcept_ndebug;
 
     /** @brief Move beatrange at index */
-    void move(const int index, const Audio::BeatRange &range);
+    void move(const int index, const Audio::BeatRange &range) noexcept_ndebug;
 
 private:
     Audio::BeatRanges *_data;

@@ -10,15 +10,13 @@
 QHash<int, QByteArray> InstancesModel::roleNames(void) const noexcept
 {
     return QHash<int, QByteArray> {
-        { Roles::Range, "range "}
+        { Roles::Range, "range" }
     };
 }
- 
+
 QVariant InstancesModel::data(const QModelIndex &index, int role) const noexcept_ndebug
 {
-    coreAssert(index.row() < 0 || index.row() >= count(),
-        throw std::range_error("InstancesModel::data: Given index is not in range"));
-    const auto &child = (*_data)[index.row()];
+    const auto &child = get(index.row());
     switch (role) {
     case Roles::Range:
         return child;
@@ -27,22 +25,29 @@ QVariant InstancesModel::data(const QModelIndex &index, int role) const noexcept
     }
 }
 
-const Audio::BeatRange &InstancesModel::get(const int index) const
+const Audio::BeatRange &InstancesModel::get(const int index) const noexcept_ndebug
 {
-
+    coreAssert(index < 0 || index >= count(),
+        throw std::range_error("InstancesModel::get: Given index is not in range"));
+    return (*_data)[index];
 }
 
-void InstancesModel::add(const Audio::BeatRange &range) noexcept_ndebug
+void InstancesModel::add(const Audio::BeatRange &range) noexcept
 {
-
+    _data->push(range);
 }
 
-void InstancesModel::remove(const int index)
+void InstancesModel::remove(const int index) noexcept_ndebug
 {
-
+    coreAssert(index < 0 || index >= count(),
+        throw std::range_error("InstancesModel::remove: Given index is not in range"));
+    _data->erase(_data->begin() + index);
 }
 
 void InstancesModel::move(const int index, const Audio::BeatRange &range) noexcept_ndebug
 {
-
+    coreAssert(index < 0 || index >= count(),
+        throw std::range_error("InstancesModel::move: Given index is not in range"));
+    _data->at(index) = range;
+    //_data->sort();
 }
