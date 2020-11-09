@@ -39,6 +39,7 @@ public:
     [[nodiscard]] QVariant data(const QModelIndex &index, int role) const noexcept override;
 
     /** @brief Get a beat range from internal list */
+<<<<<<< HEAD
     [[nodiscard]] const Audio::BeatRange &get(const int index) const noexcept_ndebug;
 
 public slots:
@@ -53,4 +54,20 @@ public slots:
 
 private:
     Audio::BeatRanges *_data;
+=======
+    [[nodiscard]] const Audio::BeatRange &get(const int index) const;
+
+public slots:
+    /** @brief Add a children to the list */
+    void add(const Audio::BeatRange &range) noexcept_ndebug;
+
+    /** @brief Remove a children from the list */
+    void remove(const int index);
+
+    /** @brief Move beatrange at index */
+    void move(const int index, const Audio::BeatRange &range);
+
+private:
+    Audio::BeatRanges *_data { nullptr };
+>>>>>>> 216b3bdef74ee0b3077d99bd76fbbb9981721911
 };
