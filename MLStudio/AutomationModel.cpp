@@ -29,11 +29,28 @@ QVariant AutomationModel::data(const QModelIndex &index, int role) const overrid
     }
 }
 
-const Point &AutomationModel::get(const int index) const noexcept_ndebug
+void AutomationModel::setData(const QModelIndex &index, const QVariant &value, int role) override
 {
-    coreAssert(index < 0 || index >= count(),
-        throw std::range_error("AutomationModel::get: Given index is not in range"));
-    return _data->points().at(index);
+    switch (role) {
+    case Role::Point:
+        set(index.row(), value.)
+    default:
+        throw std::logic_error("ControlModel::setData: Couldn't change invalid role");
+    }
+}
+
+
+void AutomationModel::updateIternal(Audio::Automation *data)
+{
+    if (_data == data)
+        return;
+    _data = data;
+    // Check if the underlying instances have different data pointer than new one
+    if (data->instances().data() != _instancesModel->getInternal()->data()) {
+        beginResetModel();
+        _instancesModel.updateInternal(&_data->instances());
+        endResetModel();
+    }
 }
 
 void AutomationModel::add(const Point &point) noexcept
@@ -50,6 +67,13 @@ void AutomationModel::remove(const int index) noexcept_ndebug
     beginRemoveRows(QModelIndex(), index, index);
     _data->points().erase(_data->points().begin() + index);
     endRemoveRows();
+}
+
+const Point &AutomationModel::get(const int index) const noexcept_ndebug
+{
+    coreAssert(index < 0 || index >= count(),
+        throw std::range_error("AutomationModel::get: Given index is not in range"));
+    return _data->points().at(index);
 }
 
 void AutomationModel::set(const int index, const Point &point) noexcept_ndebug

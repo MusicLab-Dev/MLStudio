@@ -11,7 +11,18 @@
 #include <QAbstractListModel>
 
 #include <MLCore/Utils.hpp>
+#include <MLCore/UniqueAlloc.hpp>
 #include <MLAudio/Base.hpp>
+
+struct Point : public Audio::Point
+{
+    Q_GADGET
+
+    Q_ENUM(CurveType);
+
+    Q_PROPERTY(Beat beat MEMBER beat)
+    Q_PROPERTY(CurveType curveType MEMBER curveType)
+};
 
 /** @brief Exposes an audio automation */
 class AutomationModel : public QAbstractListModel
@@ -40,8 +51,15 @@ public:
     /** @brief Query a role from children */
     [[nodiscard]] QVariant data(const QModelIndex &index, int role) const override;
 
-    /** @brief Get point index */
-    [[nodiscard]] const Point &get(const int index) const noexcept_ndebug;
+    /** @brief Modify a role from children */
+    [[nodiscard]] void setData(const QModelIndex &index, const QVariant &value, int role) override;
+
+    /** @brief Get the internal data pointer */
+    [[nodiscard]] Audio::Automation *getInternal(void) noexcept { return _data; }
+    [[nodiscard]] const Audio::Automation *getInternal(void) const noexcept { return _data; }
+
+    /** @brief Update the internal data */
+    void updateIternal(Audio::Automation *data);
 
 public slots:
     /** @brief Insert point at index */
@@ -50,10 +68,13 @@ public slots:
     /** @brief Remove point at index */
     void remove(const int index) noexcept_ndebug;
 
+    /** @brief Get point from index */
+    [[nodiscard]] const Point &get(const int index) const noexcept_ndebug;
+
     /** @brief Set point index */
     void set(const int index, const Point &point) noexcept_ndebug;
 
 private:
-    Audio::Automation *_data;
+    Audio::Automation *_data { nullptr };
     Core::UniqueAlloc<InstancesModel> _instancesModel;
-}
+};
