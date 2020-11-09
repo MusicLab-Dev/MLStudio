@@ -13,11 +13,10 @@
 #include <MLCore/Utils.hpp>
 #include <MLAudio/Base.hpp>
 
+/** @brief Exposes an audio automation */
 class AutomationModel : public QAbstractListModel
 {
     Q_OBJECT
-
-    Q_PROPERTY(bool _muted READ muted WRITE setMuted NOTIFY mutedChanged)
 
 public:
     /** @brief Roles of each Control */
@@ -26,7 +25,7 @@ public:
     };
 
     /** @brief Default constructor */
-    explicit AutomationModel(QObject *parent = nullptr) noexcept;
+    explicit AutomationModel(QObject *parent, Audio::Automation *automation) noexcept;
 
     /** @brief Destruct the AutomationModel */
     ~AutomationModel(void) noexcept = default;
@@ -38,33 +37,23 @@ public:
     [[nodiscard]] int count(void) const noexcept { return  _data->size(); }
     [[nodiscard]] int rowCount(const QModelIndex &) const noexcept override { return count(); }
 
+    /** @brief Query a role from children */
+    [[nodiscard]] QVariant data(const QModelIndex &index, int role) const override;
+
     /** @brief Get point index */
-    [[nodiscard]] const Point &get(const int index) const;
-
-    /** @brief Get muted */
-    [[nodiscard]] bool muted(void) const noexcept { return _muted; }
-
-    /** @brief Set the muted property */
-    bool setMuted(bool muted) const noexcept;
+    [[nodiscard]] const Point &get(const int index) const noexcept_ndebug;
 
 public slots:
-
     /** @brief Insert point at index */
-    void insert(const int index, const Point &point);
+    void add(const Point &point) noexcept;
 
     /** @brief Remove point at index */
-    void remove(const int index);
+    void remove(const int index) noexcept_ndebug;
 
     /** @brief Set point index */
-    void set(const int index, const Point &point);
-
-signals:
-    /** @brief Notify that muted property has changed */
-    void mutedChanged(void);
+    void set(const int index, const Point &point) noexcept_ndebug;
 
 private:
     Audio::Automation *_data;
-    UniqueAlloc<InstancesModel> _instancesModel;
-
-    bool _muted;
+    Core::UniqueAlloc<InstancesModel> _instancesModel;
 }

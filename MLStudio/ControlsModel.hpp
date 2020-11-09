@@ -13,6 +13,7 @@
 #include <MLCore/Utils.hpp>
 #include <MLAudio/Base.hpp>
 
+/** @brief Exposes a list of audio controls */
 class ControlsModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -20,12 +21,11 @@ class ControlsModel : public QAbstractListModel
 public:
     /** @brief Roles of each Controls */
     enum class Roles {
-        Control = Qt::UserRole + 1,
-        Muted
+        Control = Qt::UserRole + 1
     };
 
     /** @brief Default constructor */
-    explicit ControlsModel(QObject *parent = nullptr) noexcept;
+    explicit ControlsModel(QObject *parent, Audio::Controls *controls) noexcept;
 
     /** @brief Destruct the ControlsModel */
     ~ControlsModel(void) noexcept = default;
@@ -41,19 +41,23 @@ public:
     [[nodiscard]] QVariant data(const QModelIndex &index, int role) const noexcept override;
 
     /** @brief Get the index controlModel */
-    [[nodiscard]] const ControlModel &get(const int index) const;
+    [[nodiscard]] ControlModel *get(const int index) noexcept_ndebug { return const_cast<ControlModel *>(std::as_const(this)->get(index)); }
+    [[nodiscard]] const ControlModel *get(const int index) const noexcept_ndebug;
 
 public slots:
     /** @brief Add a children to the list */
-    void add(const Audio::ParamID id) noexcept_ndebug;
+    void add(const Audio::ParamID paramID) noexcept_ndebug;
 
     /** @brief Remove a children from the list */
-    void remove(const int index);
+    void remove(const int index) noexcept_ndebug;
 
     /** @brief Move Control from to */
     void move(const int from, const int to);
 
 private:
-    Audio::Controls *_data;
+    Audio::Controls *_data { nullptr };
     std::vector<UniqueAlloc<ControlModel>> _models;
+
+    /** @brief Refresh internal models */
+    void refreshModels(void);
 }
