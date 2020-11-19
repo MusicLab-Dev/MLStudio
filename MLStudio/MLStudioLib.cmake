@@ -22,11 +22,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${MLStudioDir})
 
 target_link_libraries(${PROJECT_NAME}
 PUBLIC
-    MLCoreLib
-    MLProtocolLib
-    MLAudioLib
     Qt${QT_VERSION_MAJOR}::Core
-    Qt${QT_VERSION_MAJOR}::Quick)
+    Qt${QT_VERSION_MAJOR}::Quick
 )
 
 target_compile_definitions(${PROJECT_NAME}
