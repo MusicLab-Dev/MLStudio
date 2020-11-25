@@ -4,7 +4,6 @@ import QtQuick.Controls 2.15
 Button {
     id: control
     hoverEnabled: true
-    enabled: true // to test disable component
 
     background: Rectangle {
         width: control.width

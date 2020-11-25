@@ -14,5 +14,6 @@
         <file>DefaultAddPluginButton.qml</file>
         <file>DefaultSettingsCategoryButton.qml</file>
         <file>settings_category_icon_button.png</file>
+        <file>DefaultColoredImage.qml</file>
     </qresource>
 </RCC>

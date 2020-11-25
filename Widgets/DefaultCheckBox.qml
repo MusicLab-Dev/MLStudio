@@ -5,7 +5,6 @@ CheckBox {
     property bool elideText: false
 
     id: control
-    text: qsTr("CheckBox")
     checked: true
     hoverEnabled: true
 

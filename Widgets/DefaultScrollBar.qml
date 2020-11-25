@@ -3,7 +3,6 @@ import QtQuick.Controls 2.15
 
 ScrollBar {
     id: control
-    size: 0.4
     active: true
     hoverEnabled: true
 
