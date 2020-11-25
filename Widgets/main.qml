@@ -33,25 +33,26 @@ Window {
     //    height: 141
     //}
 
-    //DefaultTextButton {
-    //      anchors.centerIn: parent
-    //
+//    DefaultTextButton {
+//        anchors.centerIn: parent
+//        anchors.fill: parent
+//        text: "+ NOUVEAU WORKSPACE"
+//    }
 
-    //DefaultAddPreviewButton {
-    //    anchors.centerIn: parent
-    //    width: 103
-    //    height: 70
-    //}
+//    DefaultAddPreviewButton {
+//        anchors.centerIn: parent
+//        anchors.fill: parent
+//    }
 
-    //DefaultAddPluginButton {
-    //    anchors.centerIn: parent
-    //    width: 150
-    //    height: 164
-    //}
-
-    DefaultSettingsCategoryButton {
+    DefaultAddPluginButton {
         anchors.centerIn: parent
-        width: 154
-        height: 41
+        width: 150
+        height: 164
     }
+
+//    DefaultSettingsCategoryButton {
+//        anchors.centerIn: parent
+//        width: 154
+//        height: 41
+//    }
 }

@@ -15,21 +15,24 @@ Button {
 
     indicator: Canvas {
         id: canvas
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.right: parent.right
-        anchors.rightMargin: comboBoxText.leftPadding / 2
-        width: height
-        height: control.height / 2
+        anchors.centerIn: control
+        width: Math.min(control.width, control.height) / 2.5
+        height: width
         contextType: "2d"
 
         onPaint: {
-            context.reset();
-            context.moveTo(0, 0);
-            context.lineTo(width, 0);
-            context.lineTo(width / 2, height);
-            context.closePath();
-            context.fillStyle = control.pressed ? "#31A8FF" : control.hovered ? "#31A8FF" : "#295F8B";
-            context.fill();
+            var ctx = getContext("2d")
+            ctx.strokeStyle = "#31A8FF"
+            ctx.lineWidth = 5;
+            ctx.beginPath();
+            ctx.moveTo(0, height / 2);
+            ctx.lineTo(width, height / 2);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(width / 2, 0);
+            ctx.lineTo(width / 2, height);
+            ctx.stroke();
         }
 
         Connections {

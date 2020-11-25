@@ -4,28 +4,27 @@ import QtQuick.Controls 2.15
 Button {
     id: control
     hoverEnabled: true
-    enabled: true // to test disable component
 
     indicator: Canvas {
         id: canvas
-        anchors.verticalCenter: parent.verticalCenter
-        width: height
-        height: control.height / 2
+        anchors.centerIn: control
+        width: Math.min(control.width, control.height) / 2.5
+        height: width
         contextType: "2d"
 
         onPaint: {
             var ctx = getContext("2d")
-
             ctx.strokeStyle = control.pressed || control.hovered ? "#31A8FF" : "#0D2D47"
-            ctx.lineWidth = control.background.border.width;
+            ctx.lineWidth = control.background.border.width / 2;
             ctx.beginPath();
-            ctx.moveTo(width, 0);//start point
-            ctx.lineTo(width, 20);
+            ctx.moveTo(0, height / 2);
+            ctx.lineTo(width, height / 2);
             ctx.stroke();
+
             ctx.beginPath();
-            ctx.fillStyle = "red"
-
-
+            ctx.moveTo(width / 2, 0);
+            ctx.lineTo(width / 2, height);
+            ctx.stroke();
         }
 
         Connections {
