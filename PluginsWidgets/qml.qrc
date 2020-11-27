@@ -1,0 +1,27 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>DefaultCheckBox.qml</file>
+        <file>check_blue.png</file>
+        <file>DefaultComboBox.qml</file>
+        <file>select_combobox.png</file>
+        <file>select_combobox_pressed.png</file>
+        <file>select_combobox_hovered.png</file>
+        <file>DefaultTextInput.qml</file>
+        <file>DefaultScrollBar.qml</file>
+        <file>DefaultTextButton.qml</file>
+        <file>DefaultAddPreviewButton.qml</file>
+        <file>DefaultAddPluginButton.qml</file>
+        <file>DefaultSettingsCategoryButton.qml</file>
+        <file>settings_category_icon_button.png</file>
+        <file>DefaultColoredImage.qml</file>
+        <file>DefaultMenuButton.qml</file>
+        <file>menu_button.png</file>
+        <file>DefaultFoldButton.qml</file>
+        <file>fold_button.png</file>
+        <file>Plugins/PluginComponent.qml</file>
+        <file>Plugins/PluginBackground.qml</file>
+        <file>Plugins/PluginForeground.qml</file>
+        <file>Plugins/PluginBackgroundTitle.qml</file>
+    </qresource>
+</RCC>
