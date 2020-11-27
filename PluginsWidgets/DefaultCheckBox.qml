@@ -8,6 +8,8 @@ CheckBox {
     text: qsTr("CheckBox")
     checked: true
     hoverEnabled: true
+    implicitWidth: 80
+    implicitHeight: 30
 
     background: Rectangle {
         width: Math.min(control.width, control.height)

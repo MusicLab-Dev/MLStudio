@@ -19,9 +19,10 @@
         <file>menu_button.png</file>
         <file>DefaultFoldButton.qml</file>
         <file>fold_button.png</file>
-        <file>Plugins/PluginComponent.qml</file>
-        <file>Plugins/PluginBackground.qml</file>
-        <file>Plugins/PluginForeground.qml</file>
-        <file>Plugins/PluginBackgroundTitle.qml</file>
+        <file>Plugins/PluginsView.qml</file>
+        <file>Plugins/PluginsBackground.qml</file>
+        <file>Plugins/PluginsForeground.qml</file>
+        <file>Plugins/PluginsViewTitle.qml</file>
+        <file>Plugins/PluginsContentArea.qml</file>
     </qresource>
 </RCC>

@@ -2,11 +2,11 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 
-import "./Plugins"
+import "Plugins"
 
 Window {
-    width: 1920
-    height: 1080
+    width: 1280
+    height: 720
     visible: true
     color: "#31A8FF"
     title: qsTr("Hello World")
@@ -87,7 +87,11 @@ Window {
 //        height: 11
 //    }
 
-    PluginComponent {
-        anchors.centerIn: parent
+    PluginsView {
+        anchors.fill: parent
+        anchors.topMargin: parent.height * 0.025
+        anchors.bottomMargin: parent.height * 0.025
+        anchors.leftMargin: parent.width * 0.025
+        anchors.rightMargin: parent.width * 0.025
     }
 }
