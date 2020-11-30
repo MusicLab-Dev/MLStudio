@@ -57,6 +57,6 @@ PluginsBackground {
         anchors.left: pluginsForeground.right
         anchors.right: pluginsView.right
         anchors.bottom: pluginsView.bottom
-        anchors.margins: 20
+        anchors.margins: parent.width * 0.05
     }
 }

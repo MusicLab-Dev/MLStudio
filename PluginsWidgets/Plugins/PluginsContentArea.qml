@@ -3,26 +3,40 @@ import QtQuick.Controls 2.15
 
 Rectangle {
     id: pluginsContentArea
-    color: "red"
+    color: parent.color
 
     GridView {
         anchors.fill: parent
+        cellWidth: 250
+        cellHeight: 250
+
 
         model: [
             ["Equalizer", PluginsView.Effect | PluginsView.EQ],
             ["Classic piano", PluginsView.Instrument | PluginsView.Piano]
         ]
 
-        delegate: Rectangle {
-            width: 100
-            height: 100
-            border.color: "black"
-            border.width: 1
-            visible: !pluginsView.currentFilter || pluginsView.currentFilter & modelData[1]
+        delegate: PluginsSquareComponent {
+
+            Image {
+                anchors.fill: parent
+                source: modelData[0] === "Equalizer" ? "qrc:/Plugins/plugins_component_image.png" : "qrc:/Plugins/plugins_component_image2.png"
+            }
+
+            PluginsSquareComponentTitle {
+                id: title
+                text: modelData[0]
+            }
 
             Text {
-                anchors.centerIn: parent
-                text: modelData[0]
+                x: parent.width - width
+                y: title.y + title.height
+                text: qsTr("voir plus...")
+                color: "#FFFFFF"
+                opacity: 0.42
+                font.pointSize: 11
+                font.weight: Font.Thin
+
             }
         }
     }

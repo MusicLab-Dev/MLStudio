@@ -96,11 +96,12 @@ Rectangle {
                 width: parent.width
 
                 DefaultCheckBox {
+                    id: foregroundCheckBox
                     text: pluginsForeground.filterNames[index]
                     checked: false
                     width: 80
                     height: 20
-
+                    font.weight: Font.Light
                     onCheckedChanged: {
                         if (checked)
                             pluginsView.currentFilter |= modelData
@@ -110,7 +111,11 @@ Rectangle {
                 }
 
                 Text {
+                    x: parent.width - width
                     text: "0"
+                    color: foregroundCheckBox.hovered ? "#00A3FF" : "#FFFFFF"
+                    opacity: foregroundCheckBox.hovered ? 1.0 :  0.42
+                    font.weight: Font.Thin
                 }
             }
         }
